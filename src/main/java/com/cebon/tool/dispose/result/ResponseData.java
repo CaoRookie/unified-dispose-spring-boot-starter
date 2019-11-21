@@ -51,6 +51,10 @@ public class ResponseData<T> implements Serializable {
     public static ResponseData ofSuccess(String message,Object data){
         return ResponseData.reslut(ResultEnum.SUCCESS.getCode(),message,data);
     }
+    public static ResponseData ofSuccess(Integer code,String message){
+        return  ResponseData.reslut(code,message,null);
+    }
+
 
     public static ResponseData ofSuccess(Object data){
         return ResponseData.reslut(ResultEnum.SUCCESS,data);
