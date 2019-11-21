@@ -43,9 +43,15 @@ public class ResponseData<T> implements Serializable {
     public static ResponseData reslut(BaseEnum resultEnum){
         return ResponseData.reslut(resultEnum,null);
     }
+
     public static ResponseData ofSuccess(){
         return ResponseData.reslut(ResultEnum.SUCCESS,null);
     }
+
+    public static ResponseData ofSuccess(String message,Object data){
+        return ResponseData.reslut(ResultEnum.SUCCESS.getCode(),message,data);
+    }
+
     public static ResponseData ofSuccess(Object data){
         return ResponseData.reslut(ResultEnum.SUCCESS,data);
     }
