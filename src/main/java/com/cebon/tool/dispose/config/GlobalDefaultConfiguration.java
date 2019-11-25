@@ -27,6 +27,7 @@ public class GlobalDefaultConfiguration {
     public GlobalDefaultExceptionHandler globalDefaultExceptionHandler() {
         return new GlobalDefaultExceptionHandler();
     }
+
     @Bean
     public CommonResponseDataAdvice commonResponseDataAdvice(){
         return new CommonResponseDataAdvice(globalDefaultProperties);
