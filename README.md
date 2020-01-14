@@ -8,7 +8,7 @@ Springboot统一返回以及统一异常处理
         <dependency>
             <groupId>com.cebon.tool</groupId>
             <artifactId>unified-dispose-springboot-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
     2.在启动类上添加 @EnableGlobalDispose注解，表示开启全局异常，全局返回处理
     
