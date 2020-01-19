@@ -5,6 +5,8 @@ import com.cebon.tool.dispose.exception.category.FeignException;
 import com.cebon.tool.dispose.result.ResponseData;
 import com.cebon.tool.dispose.exception.error.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +34,7 @@ import java.util.Objects;
 @Slf4j
 @RestControllerAdvice
 public final class GlobalDefaultExceptionHandler {
-
+    private static Logger logger = LoggerFactory.getLogger(GlobalDefaultExceptionHandler.class);
     /**
      * NoHandlerFoundException 404 异常处理
      */
@@ -65,19 +68,24 @@ public final class GlobalDefaultExceptionHandler {
      * Exception 类捕获 500 异常处理
      */
     @ExceptionHandler(value = Exception.class)
-    public ResponseData handlerException(Exception e) {
-        return ifDepthExceptionType(e);
+    public ResponseData handlerException(Exception e, HttpServletRequest request) {
+        logger.info("Exception message  : {}",e.getMessage());
+        logger.info("Exception from  : {}",e.getCause());
+        logger.info("Exception print  : {}",e);
+        return ifDepthExceptionType(e,request);
     }
     /**
      * 二次深度检查错误类型
      */
-    private ResponseData ifDepthExceptionType(Throwable throwable) {
+    private ResponseData ifDepthExceptionType(Throwable throwable, HttpServletRequest request) {
         Throwable cause = throwable.getCause();
+
         if (cause instanceof FeignException) {
             return handlerFeignException((FeignException) cause);
         }
         outPutError(Exception.class, ResultEnum.EXCEPTION, throwable);
-        return ResponseData.ofError(ResultEnum.EXCEPTION);
+
+        return ResponseData.ofError(ResultEnum.EXCEPTION.getCode(),ResultEnum.EXCEPTION.getMessage(),null,String.valueOf(request.getAttribute("request_id")),request.getRequestURI());
     }
     /**
      * FeignException 类捕获
