@@ -6,7 +6,7 @@
 
     <groupId>com.cebon.tool</groupId>
     <artifactId>unified-dispose-springboot-starter</artifactId>
-    <version>1.1.1</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -63,5 +63,18 @@
             </plugin>
         </plugins>
     </build>
+    <!--配置私服-->
+    <distributionManagement>
+        <repository>
+            <id>cebon-releases</id>
+            <name>cebon-releases</name>
+            <url>http://192.168.99.243:8081/repository/cebon-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>cebon-snapshots</id>
+            <name>cebon-snapshots</name>
+            <url>http://192.168.99.243:8081/repository/cebon-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

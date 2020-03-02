@@ -19,9 +19,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ResponseData<T> implements Serializable {
 
+    private String requestId;
+
     private Integer code;
 
     private String message;
+
+    private String path;
 
     private T data;
 
@@ -32,6 +36,16 @@ public class ResponseData<T> implements Serializable {
                 .data(data)
                 .build();
     }
+    public static ResponseData reslut(Integer code,String message,Object data,String requestId,String path){
+        return  ResponseData.builder()
+                .code(code)
+                .requestId(requestId)
+                .path(path)
+                .message(message)
+                .data(data)
+                .build();
+    }
+
     public static ResponseData reslut(Integer code,String message,Object data){
         return  ResponseData.builder()
                 .code(code)
@@ -66,6 +80,9 @@ public class ResponseData<T> implements Serializable {
 
     public static ResponseData ofError(BaseEnum resultEnum){
         return  ResponseData.reslut(resultEnum);
+    }
+    public static ResponseData ofError(Integer code,String msg,Object data,String requestId,String path){
+        return  ResponseData.reslut(code,msg,data,requestId,path);
     }
 
     public static ResponseData ofError(String message){
