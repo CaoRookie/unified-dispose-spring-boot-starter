@@ -3,6 +3,7 @@ package com.cebon.tool.dispose.config;
 import com.cebon.tool.dispose.advice.CommonResponseDataAdvice;
 import com.cebon.tool.dispose.exception.GlobalDefaultExceptionHandler;
 import com.cebon.tool.dispose.properties.GlobalDefaultProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

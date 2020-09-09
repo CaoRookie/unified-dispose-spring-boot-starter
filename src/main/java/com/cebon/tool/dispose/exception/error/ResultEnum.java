@@ -48,8 +48,8 @@ public enum ResultEnum implements BaseEnum {
 
     SUCCESS(200, "请求成功");
 
-    private Integer code;
-    private String message;
+    private final Integer code;
+    private final String message;
 
     ResultEnum(Integer code, String message){
         this.code = code;

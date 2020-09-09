@@ -50,24 +50,17 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice {
 
     private Boolean filter(MethodParameter methodParameter) {
         Class<?> declaringClass = methodParameter.getDeclaringClass();
-        // 检查过滤包路径
-        long count = properties.getAdviceFilterPackage().stream()
-                .filter(className -> declaringClass.getName().contains(className)).count();
-        if (count > 0) {
+        // 方法上存在注解，则直接忽略
+        if (Objects.requireNonNull(methodParameter.getMethod()).isAnnotationPresent(IgnoreResponseAdvice.class)) {
             return false;
         }
-        // 检查<类>过滤列表
-        if (properties.getAdviceFilterClass().contains(declaringClass.getName())) {
-            return false;
-        }
-        // 检查<方法>过滤列表
-        if (properties.getAdviceFilterMethod().contains(Objects.requireNonNull(methodParameter.getMethod()).getName())) {
-            return false;
-        }
-        // 检查注解是否存在
+        // 类上存在注解，直接忽略
         if (methodParameter.getDeclaringClass().isAnnotationPresent(IgnoreResponseAdvice.class)) {
             return false;
         }
-        return !Objects.requireNonNull(methodParameter.getMethod()).isAnnotationPresent(IgnoreResponseAdvice.class);
+        // 在扫描包外，直接忽略
+        long count = properties.getBasePackageScan().stream()
+                .filter(className -> declaringClass.getName().contains(className)).count();
+        return count > 0;
     }
 }

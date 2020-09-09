@@ -16,17 +16,7 @@ import java.util.List;
 public class GlobalDefaultProperties {
 
     /**
-     * 统一返回过滤包
+     * 统一返回扫描包
      */
-    private List<String> adviceFilterPackage = new ArrayList<>();
-
-    /**
-     * 统一返回过滤类
-     */
-    private List<String> adviceFilterClass = new ArrayList<>();
-
-    /**
-     * 统一返回过滤方法
-     */
-    private List<String> adviceFilterMethod = new ArrayList<>();
+    private List<String> basePackageScan = new ArrayList<>();
 }
