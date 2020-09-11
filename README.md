@@ -28,3 +28,6 @@ Springboot统一返回以及统一异常处理
     自定义返回参数的枚举需要实现BaseEnum接口
 
     统一返回的类是: ResponseData<T> 包含：code,message,data三个属性
+    
+    master:配置文件添加的是忽略包
+    cy_basecan：分支配置文件添加的是扫描包，只有这些定义包下的文件才会被统一返回
