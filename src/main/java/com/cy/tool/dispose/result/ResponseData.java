@@ -1,9 +1,9 @@
-package com.cebon.tool.dispose.result;
+package com.cy.tool.dispose.result;
 
 import java.io.Serializable;
 
-import com.cebon.tool.dispose.exception.error.ResultEnum;
-import com.cebon.tool.dispose.exception.error.base.BaseEnum;
+import com.cy.tool.dispose.exception.error.ResultEnum;
+import com.cy.tool.dispose.exception.error.base.BaseEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

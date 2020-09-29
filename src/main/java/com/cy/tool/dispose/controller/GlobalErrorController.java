@@ -1,4 +1,4 @@
-package com.cebon.tool.dispose.controller;
+package com.cy.tool.dispose.controller;
 
 import java.util.Map;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
-import com.cebon.tool.dispose.exception.error.ResultEnum;
-import com.cebon.tool.dispose.result.ResponseData;
+import com.cy.tool.dispose.exception.error.ResultEnum;
+import com.cy.tool.dispose.result.ResponseData;
 
 /**
  * /** 全局错误处理 SpringBoot默认会将异常映射到/error路径，从而根据请求方式返回html或json 在这个控制器中处理/error路径的请求，将所有异常的返回值进行统一处理

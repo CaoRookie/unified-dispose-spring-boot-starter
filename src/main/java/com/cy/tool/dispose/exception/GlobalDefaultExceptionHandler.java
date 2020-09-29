@@ -1,4 +1,4 @@
-package com.cebon.tool.dispose.exception;
+package com.cy.tool.dispose.exception;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import com.cebon.tool.dispose.exception.category.BusinessException;
-import com.cebon.tool.dispose.exception.category.FeignException;
-import com.cebon.tool.dispose.exception.error.ResultEnum;
-import com.cebon.tool.dispose.exception.error.base.BaseEnum;
-import com.cebon.tool.dispose.result.ResponseData;
+import com.cy.tool.dispose.exception.category.BusinessException;
+import com.cy.tool.dispose.exception.category.FeignException;
+import com.cy.tool.dispose.exception.error.ResultEnum;
+import com.cy.tool.dispose.exception.error.base.BaseEnum;
+import com.cy.tool.dispose.result.ResponseData;
 
 import lombok.extern.slf4j.Slf4j;
 

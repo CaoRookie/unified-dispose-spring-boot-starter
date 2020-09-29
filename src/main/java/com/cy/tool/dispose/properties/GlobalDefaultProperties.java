@@ -1,4 +1,4 @@
-package com.cebon.tool.dispose.properties;
+package com.cy.tool.dispose.properties;
 
 import java.util.ArrayList;
 import java.util.List;

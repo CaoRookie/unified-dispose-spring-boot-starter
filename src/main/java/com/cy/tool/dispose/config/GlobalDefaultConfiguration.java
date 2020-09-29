@@ -1,13 +1,13 @@
-package com.cebon.tool.dispose.config;
+package com.cy.tool.dispose.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.cebon.tool.dispose.advice.CommonResponseDataAdvice;
-import com.cebon.tool.dispose.exception.GlobalDefaultExceptionHandler;
-import com.cebon.tool.dispose.properties.GlobalDefaultProperties;
+import com.cy.tool.dispose.advice.CommonResponseDataAdvice;
+import com.cy.tool.dispose.exception.GlobalDefaultExceptionHandler;
+import com.cy.tool.dispose.properties.GlobalDefaultProperties;
 
 /**
  * 全局统一返回Bean,全局异常处理Bean注册

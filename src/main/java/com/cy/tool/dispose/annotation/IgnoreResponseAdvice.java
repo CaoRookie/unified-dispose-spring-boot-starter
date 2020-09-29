@@ -1,4 +1,4 @@
-package com.cebon.tool.dispose.annotation;
+package com.cy.tool.dispose.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

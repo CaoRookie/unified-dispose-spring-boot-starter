@@ -1,4 +1,4 @@
-package com.cebon.tool.dispose.advice;
+package com.cy.tool.dispose.advice;
 
 import java.util.Objects;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import com.alibaba.fastjson.JSON;
-import com.cebon.tool.dispose.annotation.IgnoreResponseAdvice;
-import com.cebon.tool.dispose.properties.GlobalDefaultProperties;
-import com.cebon.tool.dispose.result.ResponseData;
+import com.cy.tool.dispose.annotation.IgnoreResponseAdvice;
+import com.cy.tool.dispose.properties.GlobalDefaultProperties;
+import com.cy.tool.dispose.result.ResponseData;
 
 /**
  * 全局统一返回处理增强

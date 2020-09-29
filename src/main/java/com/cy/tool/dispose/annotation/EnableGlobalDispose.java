@@ -1,4 +1,4 @@
-package com.cebon.tool.dispose.annotation;
+package com.cy.tool.dispose.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Import;
 
-import com.cebon.tool.dispose.config.GlobalDefaultConfiguration;
+import com.cy.tool.dispose.config.GlobalDefaultConfiguration;
 
 /**
  * @author cy

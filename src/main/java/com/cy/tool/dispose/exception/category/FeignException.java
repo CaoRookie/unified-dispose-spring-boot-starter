@@ -1,6 +1,6 @@
-package com.cebon.tool.dispose.exception.category;
+package com.cy.tool.dispose.exception.category;
 
-import com.cebon.tool.dispose.exception.error.base.BaseEnum;
+import com.cy.tool.dispose.exception.error.base.BaseEnum;
 
 import lombok.Getter;
 
