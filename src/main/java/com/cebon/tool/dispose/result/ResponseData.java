@@ -30,57 +30,86 @@ public class ResponseData<T> implements Serializable {
 
     private T data;
 
-    public static ResponseData reslut(BaseEnum resultEnum, Object data) {
-        return ResponseData.builder().code(resultEnum.getCode()).message(resultEnum.getMessage()).data(data).build();
+    /**
+     * 返回结果
+     * 
+     * @param resultEnum 自定义返回异常 {@link BaseEnum}
+     * @param data 数据
+     * @return 泛型统一封装数据
+     */
+    public static <M> ResponseData<M> result(BaseEnum resultEnum, M data) {
+        return ResponseData.<M>builder().code(resultEnum.getCode()).message(resultEnum.getMessage()).data(data).build();
     }
 
-    public static ResponseData reslut(Integer code, String message, Object data, String requestId, String path) {
-        return ResponseData.builder().code(code).requestId(requestId).requestPath(path).message(message).data(data)
+    /**
+     * 返回结果
+     * 
+     * @param code 状态码
+     * @param message 状态信息
+     * @param data 数据
+     * @return 泛型统一封装数据
+     */
+    public static <M> ResponseData<M> result(Integer code, String message, M data) {
+        return ResponseData.<M>builder().code(code).message(message).data(data).build();
+    }
+
+    /**
+     * 返回结果
+     * 
+     * @param code 状态码
+     * @param message 状态信息
+     * @param data 数据
+     * @param requestId 请求ID
+     * @param path 请求路径
+     * @return 泛型统一封装数据
+     */
+    public static <M> ResponseData<M> result(Integer code, String message, M data, String requestId, String path) {
+        return ResponseData.<M>builder().code(code).requestId(requestId).requestPath(path).message(message).data(data)
             .build();
     }
 
-    public static ResponseData reslut(Integer code, String message, Object data) {
-        return ResponseData.builder().code(code).message(message).data(data).build();
+    /**
+     * 请求成功
+     * 
+     * @param data 数据
+     * @return 泛型统一封装数据
+     */
+    public static <M> ResponseData<M> success(M data) {
+        return ResponseData.result(ResultEnum.SUCCESS, data);
     }
 
-    public static ResponseData reslut(BaseEnum resultEnum) {
-        return ResponseData.reslut(resultEnum, null);
+    /**
+     * 请求成功
+     * 
+     * @param code 状态码
+     * @param message 成功描述信息
+     * @param data 数据
+     * @return 泛型统一封装数据
+     */
+    public static <M> ResponseData<M> success(Integer code, String message, M data) {
+        return ResponseData.result(code, message, data);
     }
 
-    public static ResponseData ofSuccess() {
-        return ResponseData.reslut(ResultEnum.SUCCESS, null);
+    /**
+     * 请求失败
+     *
+     * @param data 数据
+     * @return 泛型统一封装数据
+     */
+    public static <M> ResponseData<M> error(M data) {
+        return ResponseData.result(ResultEnum.BUSINESS_ERROR, data);
     }
 
-    public static ResponseData ofSuccess(String message, Object data) {
-        return ResponseData.reslut(ResultEnum.SUCCESS.getCode(), message, data);
-    }
-
-    public static ResponseData ofSuccess(String message) {
-        return ResponseData.reslut(ResultEnum.SUCCESS.getCode(), message, null);
-    }
-
-    public static ResponseData ofSuccess(Integer code, String message) {
-        return ResponseData.reslut(code, message, null);
-    }
-
-    public static ResponseData ofSuccess(Object data) {
-        return ResponseData.reslut(ResultEnum.SUCCESS, data);
-    }
-
-    public static ResponseData ofError(BaseEnum resultEnum) {
-        return ResponseData.reslut(resultEnum);
-    }
-
-    public static ResponseData ofError(Integer code, String msg, Object data, String requestId, String path) {
-        return ResponseData.reslut(code, msg, data, requestId, path);
-    }
-
-    public static ResponseData ofError(String message) {
-        return ResponseData.reslut(ResultEnum.EXCEPTION.getCode(), message, null);
-    }
-
-    public static ResponseData ofError(Integer code, String message) {
-        return ResponseData.reslut(code, message, null);
+    /**
+     * 请求成功
+     *
+     * @param code 状态码
+     * @param message 成功描述信息
+     * @param data 数据
+     * @return 泛型统一封装数据
+     */
+    public static <M> ResponseData<M> error(Integer code, String message, M data) {
+        return ResponseData.result(code, message, data);
     }
 
 }

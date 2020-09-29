@@ -22,7 +22,9 @@ Springboot统一返回以及统一异常处理
                 adviceFilterClass
                 //忽略方法集合
                 adviceFilterMethod
-      在1.0.3版本默认只有配置文件中spring.igore下配置basePackageScan才会进行全局统一返回，没有配置的都不进行统一返回
+    4.在1.0.3版本默认只有配置文件中spring.igore下配置basePackageScan才会进行全局统一返回，没有配置的都不进行统一返回
+    5.在2.0.0版本默认只有配置文件中spring.global下配置basePackages才会进行全局统一返回，没有配置的都不进行统一返
+
 2.注意：
 
     自定义返回参数的枚举需要实现BaseEnum接口

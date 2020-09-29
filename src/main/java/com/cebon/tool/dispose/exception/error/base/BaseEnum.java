@@ -1,6 +1,5 @@
 package com.cebon.tool.dispose.exception.error.base;
 
-
 /**
  * @author Caoyuan
  */

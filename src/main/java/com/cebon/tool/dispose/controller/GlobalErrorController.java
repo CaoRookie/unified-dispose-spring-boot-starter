@@ -40,7 +40,7 @@ public class GlobalErrorController implements ErrorController {
     @RequestMapping(value = PATH, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseData handleError(HttpServletRequest request) {
         Map<String, Object> attributesMap = getErrorAttributes(request, true);
-        return ResponseData.ofError(ResultEnum.EXCEPTION);
+        return ResponseData.result(ResultEnum.EXCEPTION, null);
     }
 
     protected Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace) {

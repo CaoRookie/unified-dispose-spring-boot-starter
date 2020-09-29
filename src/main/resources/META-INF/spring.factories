@@ -1,1 +1,2 @@
+#使用了注解@Import标签，所以这里不需要配置
 #org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.cebon.tool.dispose.config.GlobalDefaultConfiguration

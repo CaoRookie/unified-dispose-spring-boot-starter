@@ -10,12 +10,14 @@ import com.cebon.tool.dispose.exception.GlobalDefaultExceptionHandler;
 import com.cebon.tool.dispose.properties.GlobalDefaultProperties;
 
 /**
+ * 全局统一返回Bean,全局异常处理Bean注册
+ * 
  * @author cy
  * @date 2019-11-13 12:35
  */
 @Configuration
 @EnableConfigurationProperties(GlobalDefaultProperties.class)
-@ConditionalOnProperty(prefix = "spring.igore", value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "spring.global", value = "enabled", matchIfMissing = true)
 public class GlobalDefaultConfiguration {
 
     private GlobalDefaultProperties globalDefaultProperties;

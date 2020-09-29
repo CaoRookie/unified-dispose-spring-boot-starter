@@ -15,6 +15,8 @@ import com.cebon.tool.dispose.properties.GlobalDefaultProperties;
 import com.cebon.tool.dispose.result.ResponseData;
 
 /**
+ * 全局统一返回处理增强
+ * 
  * @author cy
  * @date 2019-11-13 12:36
  */
@@ -34,10 +36,10 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass,
-        ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        ServerHttpRequest serverHttpReqest, ServerHttpResponse serverHttpResponse) {
         // o is null -> return response
         if (o == null) {
-            return ResponseData.ofSuccess();
+            return ResponseData.success(null);
         }
         // o is instanceof ConmmonResponse -> return o
         if (o instanceof ResponseData) {
@@ -45,9 +47,9 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice {
         }
         // string 特殊处理
         if (o instanceof String) {
-            return JSON.toJSON(ResponseData.ofSuccess(o)).toString();
+            return JSON.toJSON(ResponseData.success(o)).toString();
         }
-        return ResponseData.ofSuccess(o);
+        return ResponseData.success(o);
     }
 
     private Boolean filter(MethodParameter methodParameter) {
@@ -61,7 +63,7 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice {
             return false;
         }
         // 在扫描包外，直接忽略
-        long count = properties.getBasePackageScan().stream()
+        long count = properties.getBasePackages().stream()
             .filter(className -> declaringClass.getName().contains(className)).count();
         return count > 0;
     }
