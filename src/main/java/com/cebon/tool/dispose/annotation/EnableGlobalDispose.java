@@ -1,12 +1,13 @@
 package com.cebon.tool.dispose.annotation;
 
-import com.cebon.tool.dispose.config.GlobalDefaultConfiguration;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import org.springframework.context.annotation.Import;
+
+import com.cebon.tool.dispose.config.GlobalDefaultConfiguration;
 
 /**
  * @author cy
@@ -16,5 +17,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import(GlobalDefaultConfiguration.class)
-public @interface EnableGlobalDispose {
-}
+public @interface EnableGlobalDispose {}

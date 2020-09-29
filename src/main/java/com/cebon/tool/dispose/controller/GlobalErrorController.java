@@ -1,8 +1,9 @@
 package com.cebon.tool.dispose.controller;
 
-import com.cebon.tool.dispose.exception.error.ResultEnum;
-import com.cebon.tool.dispose.result.ResponseData;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.MediaType;
@@ -11,17 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+import com.cebon.tool.dispose.exception.error.ResultEnum;
+import com.cebon.tool.dispose.result.ResponseData;
 
 /**
- /**
- * 全局错误处理
- * SpringBoot默认会将异常映射到/error路径，从而根据请求方式返回html或json
- * 在这个控制器中处理/error路径的请求，将所有异常的返回值进行统一处理
+ * /** 全局错误处理 SpringBoot默认会将异常映射到/error路径，从而根据请求方式返回html或json 在这个控制器中处理/error路径的请求，将所有异常的返回值进行统一处理
  * <p>
- * Author GreedyStar
- * Date   2018/7/19
+ * Author GreedyStar Date 2018/7/19
+ * 
  * @author CaoYuan
  * @date 2020/3/2 23:15
  */

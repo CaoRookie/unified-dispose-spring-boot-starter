@@ -1,12 +1,11 @@
 package com.cebon.tool.dispose.exception;
 
-import com.cebon.tool.dispose.exception.category.BusinessException;
-import com.cebon.tool.dispose.exception.category.FeignException;
-import com.cebon.tool.dispose.result.ResponseData;
-import com.cebon.tool.dispose.exception.error.ResultEnum;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -22,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
-import java.util.List;
-import java.util.Objects;
+import com.cebon.tool.dispose.exception.category.BusinessException;
+import com.cebon.tool.dispose.exception.category.FeignException;
+import com.cebon.tool.dispose.exception.error.ResultEnum;
+import com.cebon.tool.dispose.result.ResponseData;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author cy
@@ -34,7 +35,6 @@ import java.util.Objects;
 @Slf4j
 @RestControllerAdvice
 public final class GlobalDefaultExceptionHandler {
-    private static Logger logger = LoggerFactory.getLogger(GlobalDefaultExceptionHandler.class);
     /**
      * NoHandlerFoundException 404 异常处理
      */
@@ -44,36 +44,35 @@ public final class GlobalDefaultExceptionHandler {
         outPutErrorWarn(NoHandlerFoundException.class, ResultEnum.NOT_FOUND, exception);
         return ResponseData.ofError(ResultEnum.NOT_FOUND);
     }
+
     /**
      * HttpRequestMethodNotSupportedException 405 异常处理
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseData handlerHttpRequestMethodNotSupportedException(
-            HttpRequestMethodNotSupportedException exception) {
-        outPutErrorWarn(HttpRequestMethodNotSupportedException.class,
-                ResultEnum.METHOD_NOT_ALLOWED, exception);
+    public ResponseData
+        handlerHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
+        outPutErrorWarn(HttpRequestMethodNotSupportedException.class, ResultEnum.METHOD_NOT_ALLOWED, exception);
         return ResponseData.ofError(ResultEnum.METHOD_NOT_ALLOWED);
     }
+
     /**
      * HttpMediaTypeNotSupportedException 415 异常处理
      */
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResponseData handlerHttpMediaTypeNotSupportedException(
-            HttpMediaTypeNotSupportedException exception) {
-        outPutErrorWarn(HttpMediaTypeNotSupportedException.class,
-                ResultEnum.UNSUPPORTED_MEDIA_TYPE, exception);
+    public ResponseData handlerHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException exception) {
+        outPutErrorWarn(HttpMediaTypeNotSupportedException.class, ResultEnum.UNSUPPORTED_MEDIA_TYPE, exception);
         return ResponseData.ofError(ResultEnum.UNSUPPORTED_MEDIA_TYPE);
     }
+
     /**
      * Exception 类捕获 500 异常处理
      */
     @ExceptionHandler(value = Exception.class)
     public ResponseData handlerException(Exception e, HttpServletRequest request) {
-        logger.info("Exception message  : {}",e.getMessage());
-        logger.info("Exception from  : {}",e.getCause());
-        logger.info("Exception print  : {}",e);
-        return ifDepthExceptionType(e,request);
+        log.info("Exception message  : {}{}", e.getMessage(), e);
+        return ifDepthExceptionType(e, request);
     }
+
     /**
      * 二次深度检查错误类型
      */
@@ -81,12 +80,14 @@ public final class GlobalDefaultExceptionHandler {
         Throwable cause = throwable.getCause();
 
         if (cause instanceof FeignException) {
-            return handlerFeignException((FeignException) cause);
+            return handlerFeignException((FeignException)cause);
         }
         outPutError(Exception.class, ResultEnum.EXCEPTION, throwable);
 
-        return ResponseData.ofError(ResultEnum.EXCEPTION.getCode(),ResultEnum.EXCEPTION.getMessage(),null,String.valueOf(request.getAttribute("request_id")),request.getRequestURI());
+        return ResponseData.ofError(ResultEnum.EXCEPTION.getCode(), ResultEnum.EXCEPTION.getMessage(), null,
+            String.valueOf(request.getAttribute("request_id")), request.getRequestURI());
     }
+
     /**
      * FeignException 类捕获
      */
@@ -95,6 +96,7 @@ public final class GlobalDefaultExceptionHandler {
         outPutError(FeignException.class, ResultEnum.RPC_ERROR, e);
         return ResponseData.ofError(ResultEnum.RPC_ERROR);
     }
+
     /**
      * BusinessException 类捕获
      */
@@ -103,15 +105,18 @@ public final class GlobalDefaultExceptionHandler {
         outPutError(BusinessException.class, ResultEnum.BUSINESS_ERROR, e);
         return ResponseData.ofError(e.getCode(), e.getMessage());
     }
+
     /**
      * HttpMessageNotReadableException 参数错误异常
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseData handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         outPutError(HttpMessageNotReadableException.class, ResultEnum.PARAM_ERROR, e);
-        String msg = String.format("{} : 错误详情( {} )", ResultEnum.PARAM_ERROR.getMessage(), Objects.requireNonNull(e.getRootCause()).getMessage());
+        String msg = String.format("{} : 错误详情( {} )", ResultEnum.PARAM_ERROR.getMessage(),
+            Objects.requireNonNull(e.getRootCause()).getMessage());
         return ResponseData.ofError(ResultEnum.PARAM_ERROR.getCode(), msg);
     }
+
     /**
      * 绑定失败，如表单对象参数违反约束
      */
@@ -123,7 +128,7 @@ public final class GlobalDefaultExceptionHandler {
     }
 
     /**
-     * 	参数无效，如JSON请求参数违反约束
+     * 参数无效，如JSON请求参数违反约束
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseData handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
@@ -140,6 +145,7 @@ public final class GlobalDefaultExceptionHandler {
         outPutError(ConstraintViolationException.class, ResultEnum.PARAM_ERROR, e);
         return ResponseData.ofError(ResultEnum.PARAM_ERROR);
     }
+
     /**
      * 参数缺失
      */
@@ -148,6 +154,7 @@ public final class GlobalDefaultExceptionHandler {
         outPutError(ConstraintViolationException.class, ResultEnum.PARAM_ERROR, e);
         return ResponseData.ofError(ResultEnum.PARAM_ERROR);
     }
+
     /**
      * 参数类型不匹配
      */

@@ -1,6 +1,7 @@
 package com.cebon.tool.dispose.exception.category;
 
 import com.cebon.tool.dispose.exception.error.base.BaseEnum;
+
 import lombok.Getter;
 
 /**
@@ -10,9 +11,9 @@ import lombok.Getter;
 @Getter
 public class FeignException extends RuntimeException {
 
-
     private Integer code;
-    private boolean isShowMsg = true;
+    private Boolean isShowMsg = true;
+
     /**
      * 使用枚举传参
      *
@@ -22,6 +23,7 @@ public class FeignException extends RuntimeException {
         super(errorCode.getMessage());
         this.code = errorCode.getCode();
     }
+
     /**
      * 使用自定义消息
      *

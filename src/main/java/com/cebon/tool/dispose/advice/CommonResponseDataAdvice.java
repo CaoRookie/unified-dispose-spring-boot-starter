@@ -1,9 +1,7 @@
 package com.cebon.tool.dispose.advice;
 
-import com.alibaba.fastjson.JSON;
-import com.cebon.tool.dispose.annotation.IgnoreResponseAdvice;
-import com.cebon.tool.dispose.properties.GlobalDefaultProperties;
-import com.cebon.tool.dispose.result.ResponseData;
+import java.util.Objects;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -11,7 +9,10 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import java.util.Objects;
+import com.alibaba.fastjson.JSON;
+import com.cebon.tool.dispose.annotation.IgnoreResponseAdvice;
+import com.cebon.tool.dispose.properties.GlobalDefaultProperties;
+import com.cebon.tool.dispose.result.ResponseData;
 
 /**
  * @author cy
@@ -22,7 +23,7 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice {
 
     private GlobalDefaultProperties properties;
 
-    public CommonResponseDataAdvice(GlobalDefaultProperties properties){
+    public CommonResponseDataAdvice(GlobalDefaultProperties properties) {
         this.properties = properties;
     }
 
@@ -32,7 +33,8 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice {
     }
 
     @Override
-    public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+    public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass,
+        ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         // o is null -> return response
         if (o == null) {
             return ResponseData.ofSuccess();
@@ -60,7 +62,7 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice {
         }
         // 在扫描包外，直接忽略
         long count = properties.getBasePackageScan().stream()
-                .filter(className -> declaringClass.getName().contains(className)).count();
+            .filter(className -> declaringClass.getName().contains(className)).count();
         return count > 0;
     }
 }

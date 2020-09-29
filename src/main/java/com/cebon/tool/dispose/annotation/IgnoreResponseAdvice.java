@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
  * @date 2019-11-13 10:53
  */
 
-@Target(value = {ElementType.TYPE,ElementType.METHOD})
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface IgnoreResponseAdvice {
-}
+public @interface IgnoreResponseAdvice {}
